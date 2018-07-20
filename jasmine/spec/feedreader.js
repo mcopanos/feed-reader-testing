@@ -55,7 +55,7 @@ $(function() {
 
         // Checks to make sure the feed is not empty
         it('has atleast one entry after call', (done) => {
-            expect($('.feed .enty-link')).not.toBe(0);
+            expect($('.feed .entry')).not.toBe(0);
             done();
         });
     });
@@ -63,14 +63,16 @@ $(function() {
     
     describe('New Feed Selection', () => {
         // Variable for old content
-        let  oldContent = $('.entry-link').attr('href');
+        let  oldContent;
+        let freshContent;
 
         //Calls the loadFeed function
         beforeEach( (done) => {
             loadFeed(0, () => {
-                oldContent;
+                oldContent = $('.feed').html();
              
                 loadFeed(1, () => {
+                    freshContent = $('.feed').html;
                     done(); 
                 });
             });     
@@ -78,7 +80,6 @@ $(function() {
         });
 
         it('has new content', (done) => {
-            let freshContent = $('.entry-link').attr('href');
             expect(freshContent).not.toBe(oldContent)
             done();
         });
